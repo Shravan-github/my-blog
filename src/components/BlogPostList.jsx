@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BlogPostItem from "./BlogPostItem";
 import { useNavigate } from "react-router-dom";
+import { Container, Grid, Button, Typography } from '@mui/material';
 
 const BlogPostList = () => {
   const [posts, setPosts] = useState([]);
@@ -32,33 +33,33 @@ const BlogPostList = () => {
   };
 
   return (
-    <div>
+    <Container>
       {error ? (
-        <p>{`Error: ${error}`}</p>
+        <Typography color="error">{`Error: ${error}`}</Typography>
       ) : (
         <>
-          {posts.map((post, index) => (
-            <BlogPostItem
-              key={index}
-              post={post}
-              onClick={() => handlePostClick(post)}
-            />
-          ))}
-          <div>
+          <Grid container spacing={2}>
+            {posts.map((post, index) => (
+              <Grid item xs={12} key={index}>
+                <BlogPostItem post={post} onClick={() => handlePostClick(post)} />
+              </Grid>
+            ))}
+          </Grid>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
             {currentPage > 1 && (
-              <button onClick={() => setCurrentPage(currentPage - 1)}>
+              <Button variant="contained" onClick={() => setCurrentPage(currentPage - 1)}>
                 Previous
-              </button>
+              </Button>
             )}
             {currentPage < totalPages && (
-              <button onClick={() => setCurrentPage(currentPage + 1)}>
+              <Button variant="contained" onClick={() => setCurrentPage(currentPage + 1)}>
                 Next
-              </button>
+              </Button>
             )}
           </div>
         </>
       )}
-    </div>
+    </Container>
   );
 };
 
