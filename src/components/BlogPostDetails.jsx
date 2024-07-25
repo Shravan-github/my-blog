@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Container, Button, Typography, CardMedia } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 const BlogPostDetails = () => {
   const location = useLocation();
@@ -8,17 +8,23 @@ const BlogPostDetails = () => {
   const post = location.state.post;
 
   return (
-    <Container>
-      <Button variant="contained" onClick={() => navigate(-1)} style={{ marginBottom: '20px' }}>
+    <Box>
+      <Button variant="contained" onClick={() => navigate(-1)} sx={{ mb: 2 }}>
         Back
       </Button>
-      <Typography variant="h3" gutterBottom>{post.title}</Typography>
-      <Typography variant="body1" paragraph>{post.content}</Typography>
-      {post.urlToImage && <CardMedia component="img" image={post.urlToImage} alt={post.title} style={{ maxWidth: '100%', marginBottom: '20px' }} />}
-      <Typography variant="caption" color="textSecondary">
+      <Typography variant="h4" gutterBottom>
+        {post.title}
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        {post.content}
+      </Typography>
+      {post.urlToImage && (
+        <Box component="img" src={post.urlToImage} alt={post.title} sx={{ maxWidth: '100%', mb: 2 }} />
+      )}
+      <Typography variant="body2" color="text.secondary">
         {new Date(post.publishedAt).toLocaleDateString()}
       </Typography>
-    </Container>
+    </Box>
   );
 };
 

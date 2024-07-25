@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import BlogPostItem from "./BlogPostItem";
-import { useNavigate } from "react-router-dom";
-import { Container, Grid, Button, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import BlogPostItem from './BlogPostItem';
+import { useNavigate } from 'react-router-dom';
+import { Box, Button, Typography, Grid } from '@mui/material';
 
 const BlogPostList = () => {
   const [posts, setPosts] = useState([]);
@@ -33,7 +33,7 @@ const BlogPostList = () => {
   };
 
   return (
-    <Container>
+    <Box>
       {error ? (
         <Typography color="error">{`Error: ${error}`}</Typography>
       ) : (
@@ -45,7 +45,7 @@ const BlogPostList = () => {
               </Grid>
             ))}
           </Grid>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
             {currentPage > 1 && (
               <Button variant="contained" onClick={() => setCurrentPage(currentPage - 1)}>
                 Previous
@@ -56,10 +56,10 @@ const BlogPostList = () => {
                 Next
               </Button>
             )}
-          </div>
+          </Box>
         </>
       )}
-    </Container>
+    </Box>
   );
 };
 
